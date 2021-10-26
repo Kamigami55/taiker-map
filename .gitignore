@@ -32,3 +32,9 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# GraphQL schema
+schema.graphql
+
+# Chromatic storybook build log
+build-storybook.log
