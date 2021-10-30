@@ -1,6 +1,6 @@
 import React from 'react'
 
-import getDistanceFromBounds from '@/libs/getDistanceFromBounds'
+import getMapRadiusFromBounds from '@/libs/getMapRadiusFromBounds'
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from '@/constants/mapConstants'
 
 const MapContext = React.createContext()
@@ -9,7 +9,7 @@ const DefaultReducerValue = {
   map: null,
   center: DEFAULT_CENTER,
   zoom: DEFAULT_ZOOM,
-  distance: 600000, // Diagonal distance of map view in meter
+  radius: 300000, // radius of map view in meter
 }
 
 export const UPDATE_MAP_CONTROL = 'UPDATE_MAP_CONTROL'
@@ -24,13 +24,13 @@ function mapReducer(state, { type, payload = {} } = {}) {
         lng: state.map.center.lng(),
       }
       const zoom = state.map.zoom
-      const distance = getDistanceFromBounds(state.map)
+      const radius = getMapRadiusFromBounds(state.map)
 
       return {
         ...state,
         center,
         zoom,
-        distance,
+        radius,
       }
     }
     case SET_MAP: {
