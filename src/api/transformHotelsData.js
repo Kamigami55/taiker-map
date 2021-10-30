@@ -1,6 +1,6 @@
 export default function transformHotelsData(data) {
   return (
-    data?.map((spot) => ({
+    data?.map?.((spot) => ({
       id: spot?.ID || '',
       name: spot?.Name || '',
       position: {
