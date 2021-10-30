@@ -2,6 +2,7 @@ import React from 'react'
 
 import getMapRadiusFromBounds from '@/libs/getMapRadiusFromBounds'
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from '@/constants/mapConstants'
+import MapStyles from '@/mapStyles'
 
 const MapContext = React.createContext()
 
@@ -10,10 +11,12 @@ const DefaultReducerValue = {
   center: DEFAULT_CENTER,
   zoom: DEFAULT_ZOOM,
   radius: 300000, // radius of map view in meter
+  style: MapStyles[0],
 }
 
 export const UPDATE_MAP_CONTROL = 'UPDATE_MAP_CONTROL'
 export const SET_MAP = 'SET_MAP'
+export const CHANGE_MAP_STYLE = 'CHANGE_MAP_STYLE'
 
 function mapReducer(state, { type, payload = {} } = {}) {
   switch (type) {
@@ -39,6 +42,13 @@ function mapReducer(state, { type, payload = {} } = {}) {
         map: payload?.map,
       }
     }
+    case CHANGE_MAP_STYLE: {
+      return {
+        ...state,
+        style: payload?.style,
+      }
+    }
+
     default: {
       throw new Error(`Unhandled action type: ${type}`)
     }

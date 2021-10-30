@@ -18,7 +18,7 @@ function Map({ spots }) {
     googleMapsApiKey: NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
   })
 
-  const { dispatch } = useMapContext()
+  const { state, dispatch } = useMapContext()
 
   const onLoad = React.useCallback((map) => {
     dispatch({ type: SET_MAP, payload: { map } })
@@ -47,6 +47,7 @@ function Map({ spots }) {
         streetViewControl: false,
         rotateControl: true,
         fullscreenControl: false,
+        styles: state.style.config,
       }}
       onIdle={updateMapControl}
     >
