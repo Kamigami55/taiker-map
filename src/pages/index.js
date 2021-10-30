@@ -1,11 +1,11 @@
 import Layout from '@/components/Layout'
 import IndexPageTemplate from '@/components/templates/IndexPageTemplate'
 import { MapProvider, useMapContext } from '@/contexts/mapContext'
-import { useGeolocation } from '@/hooks/useGeolocation'
+// import { useGeolocation } from '@/hooks/useGeolocation'
 import { useAllTourismSpots } from '@/api/useAllTourismSpots'
 
 function IndexPage() {
-  const [position] = useGeolocation()
+  // const [position] = useGeolocation()
   const { state } = useMapContext()
   const { spots } = useAllTourismSpots({
     center: state.center,
@@ -14,13 +14,6 @@ function IndexPage() {
   return (
     <Layout>
       <IndexPageTemplate spots={spots} />
-
-      <p>{position?.coords?.latitude}</p>
-      <p>{position?.coords?.longitude}</p>
-
-      {spots.map((spot) => (
-        <p key={spot.id}>{spot.name}</p>
-      ))}
     </Layout>
   )
 }
