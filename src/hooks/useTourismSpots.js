@@ -1,7 +1,10 @@
 import { useMemo } from 'react'
 import useSWR from 'swr'
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
+import getAuthorizationHeader from '@/libs/getAuthorizationHeader'
+
+const fetcher = (...args) =>
+  fetch(...args, { headers: getAuthorizationHeader() }).then((res) => res.json())
 
 const transformData = (data) => {
   return (
@@ -13,10 +16,10 @@ const transformData = (data) => {
 }
 
 export function useTourismSpots() {
-  const { data } = useSWR(
-    'https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$top=30&$format=JSON',
-    fetcher
+  const url = new URL(
+    'https://ptx.transportdata.tw/MOTC/v2/Tourism/ScenicSpot?$top=100&$format=JSON'
   )
+  const { data } = useSWR([url.toString()], fetcher)
   const tourismSpots = useMemo(() => transformData(data), [data]) || []
 
   return { tourismSpots }
