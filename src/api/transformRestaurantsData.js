@@ -1,0 +1,12 @@
+export default function transformRestaurantsData(data) {
+  return (
+    data?.map((spot) => ({
+      id: spot?.ID || '',
+      name: spot?.Name || '',
+      position: {
+        lat: spot?.Position?.PositionLat,
+        lng: spot?.Position?.PositionLon,
+      },
+    })) || []
+  )
+}

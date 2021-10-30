@@ -2,23 +2,23 @@ import Layout from '@/components/Layout'
 import IndexPageTemplate from '@/components/templates/IndexPageTemplate'
 import { MapProvider, useMapContext } from '@/contexts/mapContext'
 import { useGeolocation } from '@/hooks/useGeolocation'
-import { useTourismSpots } from '@/hooks/useTourismSpots'
+import { useAllTourismSpots } from '@/api/useAllTourismSpots'
 
 function IndexPage() {
   const [position] = useGeolocation()
   const { state } = useMapContext()
-  const { tourismSpots } = useTourismSpots({
+  const { spots } = useAllTourismSpots({
     center: state.center,
-    distance: state.distance,
+    distance: state.radius,
   })
   return (
     <Layout>
-      <IndexPageTemplate tourismSpots={tourismSpots} />
+      <IndexPageTemplate spots={spots} />
 
       <p>{position?.coords?.latitude}</p>
       <p>{position?.coords?.longitude}</p>
 
-      {tourismSpots.map((spot) => (
+      {spots.map((spot) => (
         <p key={spot.id}>{spot.name}</p>
       ))}
     </Layout>
