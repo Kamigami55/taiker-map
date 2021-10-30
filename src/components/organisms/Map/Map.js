@@ -37,6 +37,7 @@ function Map({ spots }) {
       mapContainerStyle={containerStyle}
       center={DEFAULT_CENTER}
       zoom={DEFAULT_ZOOM}
+      clickableIcons={false}
       onLoad={onLoad}
       onUnmount={onUnmount}
       options={{
