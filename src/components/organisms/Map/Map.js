@@ -7,6 +7,8 @@ import { NEXT_PUBLIC_GOOGLE_MAP_API_KEY } from '@/constants/envValues'
 import { useMapContext, UPDATE_MAP_CONTROL, SET_MAP } from '@/contexts/mapContext'
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from '@/constants/mapConstants'
 
+const PIN_ICON_SRC = '/images/pin.png'
+
 const containerStyle = {
   width: '400px',
   height: '400px',
@@ -52,7 +54,16 @@ function Map({ spots }) {
       onIdle={updateMapControl}
     >
       {spots?.map((spot) => (
-        <Marker key={spot.id} position={spot.position} />
+        <Marker
+          key={spot.id}
+          position={spot.position}
+          icon={{
+            url: PIN_ICON_SRC,
+            size: { width: 64, height: 64 },
+            anchor: { x: 16, y: 32 },
+            scaledSize: { width: 32, height: 32 },
+          }}
+        />
       ))}
       <></>
     </GoogleMap>
