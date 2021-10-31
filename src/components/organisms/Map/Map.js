@@ -7,6 +7,8 @@ import { NEXT_PUBLIC_GOOGLE_MAP_API_KEY } from '@/constants/envValues'
 import { useMapContext, UPDATE_MAP_CONTROL, SET_MAP } from '@/contexts/mapContext'
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from '@/constants/mapConstants'
 
+import styles from './Map.module.scss'
+
 const PIN_ICON_SRC = '/images/pin.png'
 
 const containerStyle = {
@@ -21,6 +23,7 @@ function Map({ spots }) {
   })
 
   const { state, dispatch } = useMapContext()
+  const { enableControl } = state
 
   const onLoad = React.useCallback((map) => {
     dispatch({ type: SET_MAP, payload: { map } })
@@ -37,17 +40,19 @@ function Map({ spots }) {
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
+      mapContainerClassName={!enableControl && styles.hideGoogleMapMarks}
       center={DEFAULT_CENTER}
       zoom={DEFAULT_ZOOM}
       clickableIcons={false}
       onLoad={onLoad}
       onUnmount={onUnmount}
       options={{
-        zoomControl: true,
+        gestureHandling: enableControl ? 'auto' : 'none',
+        zoomControl: enableControl,
+        scaleControl: enableControl,
+        rotateControl: enableControl,
         mapTypeControl: false,
-        scaleControl: true,
         streetViewControl: false,
-        rotateControl: true,
         fullscreenControl: false,
         styles: state.style.config,
       }}

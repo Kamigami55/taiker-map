@@ -1,0 +1,21 @@
+/* Hide Google Map trademarks */
+.hideGoogleMapMarks {
+  a[href^="http://maps.google.com/maps"]
+  {
+    display: none !important;
+  }
+  a[href^="https://maps.google.com/maps"]
+  {
+    display: none !important;
+  }
+  :global {
+    .gmnoprint a,
+    .gmnoprint span,
+    .gm-style-cc {
+      display: none;
+    }
+    .gmnoprint div {
+      background: none !important;
+    }
+  }
+}

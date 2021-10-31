@@ -5,6 +5,7 @@ import Container from '@/components/molecules/Container'
 import MapStyleSelect from '@/components/molecules/MapStyleSelect'
 import Map from '@/components/organisms/Map'
 import ExportButton from '@/components/atoms/ExportButton'
+import MapLockControl from '@/components/atoms/MapLockControl'
 
 export default function IndexPageTemplate({ spots }) {
   const ref = useRef(null)
@@ -33,8 +34,10 @@ export default function IndexPageTemplate({ spots }) {
       <div ref={ref}>
         <IndexHeading />
         <Map spots={spots} />
-        <MapStyleSelect />
       </div>
+
+      <MapStyleSelect />
+      <MapLockControl />
 
       <ExportButton onClick={handleExport} />
 

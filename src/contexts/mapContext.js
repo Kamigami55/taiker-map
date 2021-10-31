@@ -12,11 +12,13 @@ const DefaultReducerValue = {
   zoom: DEFAULT_ZOOM,
   radius: 300000, // radius of map view in meter
   style: MapStyles[0],
+  enableControl: true,
 }
 
 export const UPDATE_MAP_CONTROL = 'UPDATE_MAP_CONTROL'
 export const SET_MAP = 'SET_MAP'
 export const CHANGE_MAP_STYLE = 'CHANGE_MAP_STYLE'
+export const TOGGLE_MAP_CONTROL = 'TOGGLE_MAP_CONTROL'
 
 function mapReducer(state, { type, payload = {} } = {}) {
   switch (type) {
@@ -46,6 +48,12 @@ function mapReducer(state, { type, payload = {} } = {}) {
       return {
         ...state,
         style: payload?.style,
+      }
+    }
+    case TOGGLE_MAP_CONTROL: {
+      return {
+        ...state,
+        enableControl: !state.enableControl,
       }
     }
 
