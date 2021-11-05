@@ -21,6 +21,13 @@ module.exports = {
       ...config.resolve.alias,
       '@': path.resolve(__dirname, '../src/'),
     }
+    // add SCSS support for CSS Modules
+    // https://github.com/storybookjs/storybook/issues/12464#issuecomment-824107014
+    config.module.rules.push({
+      test: /\.scss$/,
+      use: ['style-loader', 'css-loader?modules&importLoaders', 'sass-loader'],
+      include: path.resolve(__dirname, '../'),
+    });
     return config
   },
 }
