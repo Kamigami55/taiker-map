@@ -11,7 +11,7 @@ const DefaultReducerState = {
   map: null,
   center: DEFAULT_CENTER,
   zoom: DEFAULT_ZOOM,
-  radius: 300000, // radius of map view in meter
+  radius: 0, // radius of map view in meter
   style: MapStyles[0],
   enableControl: true,
 }
