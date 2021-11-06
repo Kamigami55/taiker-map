@@ -6,6 +6,7 @@ import { useExportContext } from '@/contexts/exportContext'
 
 export default function IndexPageTemplate() {
   const { previewUrl } = useExportContext()
+
   return (
     <div className="flex flex-row min-h-screen text-gray-800 bg-gray-100">
       <SideBar />

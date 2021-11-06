@@ -1,6 +1,15 @@
-import MapStyleSelect from '@/components/molecules/MapStyleSelect'
+import { useState } from 'react'
+
+import SpotsPanel from '@/components/organisms/SpotsPanel'
+import StylePanel from '@/components/organisms/StylePanel'
+import ToggleButton from '@/components/atoms/ToggleButton'
+
+const SPOTS_PANEL = 'SPOTS_PANEL'
+const STYLE_PANEL = 'STYLE_PANEL'
 
 export default function SideBar() {
+  const [activePanel, setActivePanel] = useState(SPOTS_PANEL)
+
   return (
     <aside className="w-64 bg-indigo-500 md:shadow">
       <div className="p-4">
@@ -17,7 +26,23 @@ export default function SideBar() {
       </div>
 
       <div className="py-6 px-4">
-        <MapStyleSelect />
+        <div className="flex gap-4 content-evenly items-center mb-4">
+          <ToggleButton
+            onClick={() => setActivePanel(SPOTS_PANEL)}
+            active={activePanel === SPOTS_PANEL}
+          >
+            景點清單
+          </ToggleButton>
+          <ToggleButton
+            onClick={() => setActivePanel(STYLE_PANEL)}
+            active={activePanel === STYLE_PANEL}
+          >
+            地圖樣式
+          </ToggleButton>
+        </div>
+
+        {activePanel === SPOTS_PANEL && <SpotsPanel />}
+        {activePanel === STYLE_PANEL && <StylePanel />}
       </div>
     </aside>
   )
