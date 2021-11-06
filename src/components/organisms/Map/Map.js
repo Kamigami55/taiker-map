@@ -1,13 +1,14 @@
 import React from 'react'
 import { debounce } from 'lodash'
-// import PropTypes from 'prop-types'
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
 
 import { NEXT_PUBLIC_GOOGLE_MAP_API_KEY } from '@/constants/envValues'
 import { useMapContext, UPDATE_MAP_CONTROL, SET_MAP } from '@/contexts/mapContext'
+import { useSpotsContext } from '@/contexts/spotsContext'
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from '@/constants/mapConstants'
 
 import styles from './Map.module.scss'
+import MapStub from './MapStub'
 
 const PIN_ICON_SRC = '/images/pin.png'
 
@@ -16,14 +17,14 @@ const containerStyle = {
   height: '400px',
 }
 
-function MapComponent({ spots }) {
+function MapComponent() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
   })
 
-  const { state, dispatch } = useMapContext()
-  const { enableControl } = state
+  const { state: { enableControl, style } = {}, dispatch } = useMapContext()
+  const { state: { spots } = {} } = useSpotsContext()
 
   const onLoad = React.useCallback((map) => {
     dispatch({ type: SET_MAP, payload: { map } })
@@ -54,7 +55,7 @@ function MapComponent({ spots }) {
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
-        styles: state.style.config,
+        styles: style.config,
       }}
       onIdle={updateMapControl}
     >
@@ -77,17 +78,10 @@ function MapComponent({ spots }) {
   )
 }
 
-function MapStub() {
-  return <img src="/images/map.png" alt="" className="object-cover w-[400px] h-[400px]" />
-}
-
-function Map(props) {
+function Map() {
   const { state: { stubbingMap = false } = {} } = useMapContext()
-  if (stubbingMap) {
-    return <MapStub />
-  } else {
-    return <MapComponent {...props} />
-  }
+
+  return stubbingMap ? <MapStub /> : <MapComponent />
 }
 
 export default React.memo(Map)

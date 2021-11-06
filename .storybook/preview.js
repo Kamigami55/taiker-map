@@ -22,14 +22,20 @@ Object.defineProperty(NextImage, 'default', {
   value: (props) => <OriginalNextImage {...props} unoptimized />,
 })
 
-// Mock MapContext
+// Mock context providers
 import React from 'react'
 import { MapProvider, MockReducerState } from '../src/contexts/mapContext'
+import { SpotsProvider } from '../src/contexts/spotsContext'
+import { ExportProvider } from '../src/contexts/exportContext'
 
 export const decorators = [
   (Story) => (
-    <MapProvider defaultState={MockReducerState}>
-      <Story />
-    </MapProvider>
+    <ExportProvider>
+      <SpotsProvider>
+        <MapProvider defaultState={MockReducerState}>
+          <Story />
+        </MapProvider>
+      </SpotsProvider>
+    </ExportProvider>
   ),
 ]

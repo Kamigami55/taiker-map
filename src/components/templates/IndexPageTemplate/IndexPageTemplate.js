@@ -1,51 +1,26 @@
-import { useCallback, useRef, useState } from 'react'
+import SideBar from '@/components/organisms/SideBar'
+import TopBar from '@/components/organisms/TopBar'
+import CanvasContainer from '@/components/organisms/CanvasContainer'
+import Canvas from '@/components/organisms/Canvas'
+import { useExportContext } from '@/contexts/exportContext'
 
-import IndexHeading from '@/components/atoms/IndexHeading'
-import Container from '@/components/molecules/Container'
-import MapStyleSelect from '@/components/molecules/MapStyleSelect'
-import Map from '@/components/organisms/Map'
-import ExportButton from '@/components/atoms/ExportButton'
-import MapLockControl from '@/components/atoms/MapLockControl'
-
-export default function IndexPageTemplate({ spots }) {
-  const ref = useRef(null)
-  const [previewUrl, setPreviewUrl] = useState(null)
-
-  const handleExport = useCallback(async () => {
-    if (ref.current === null) {
-      return
-    }
-
-    const html2canvas = (await import('html2canvas')).default
-    html2canvas(ref.current, {
-      useCORS: true,
-    }).then(function (canvas) {
-      const img = canvas.toDataURL('image/png')
-      setPreviewUrl(img)
-      const link = document.createElement('a')
-      link.download = 'map.png'
-      link.href = img
-      link.click()
-    })
-  }, [ref])
-
+export default function IndexPageTemplate() {
+  const { previewUrl } = useExportContext()
   return (
-    <Container>
-      <div ref={ref}>
-        <IndexHeading />
-        <Map spots={spots} />
-      </div>
+    <div className="flex flex-row min-h-screen text-gray-800 bg-gray-100">
+      <SideBar />
+      <main className="flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in main">
+        <TopBar />
+        <CanvasContainer>
+          <Canvas />
+        </CanvasContainer>
 
-      <MapStyleSelect />
-      <MapLockControl />
-
-      <ExportButton onClick={handleExport} />
-
-      {previewUrl && (
-        <div>
-          <img src={previewUrl} alt="preview" />
-        </div>
-      )}
-    </Container>
+        {previewUrl && (
+          <div>
+            <img src={previewUrl} alt="preview" />
+          </div>
+        )}
+      </main>
+    </div>
   )
 }
