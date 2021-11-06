@@ -21,3 +21,15 @@ Object.defineProperty(NextImage, 'default', {
   configurable: true,
   value: (props) => <OriginalNextImage {...props} unoptimized />,
 })
+
+// Mock MapContext
+import React from 'react'
+import { MapProvider, MockReducerState } from '../src/contexts/mapContext'
+
+export const decorators = [
+  (Story) => (
+    <MapProvider defaultState={MockReducerState}>
+      <Story />
+    </MapProvider>
+  ),
+]

@@ -16,7 +16,7 @@ const containerStyle = {
   height: '400px',
 }
 
-function Map({ spots }) {
+function MapComponent({ spots }) {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
@@ -77,8 +77,17 @@ function Map({ spots }) {
   )
 }
 
+function MapStub() {
+  return <img src="/images/map.png" alt="" className="object-cover w-[400px] h-[400px]" />
+}
+
+function Map(props) {
+  const { state: { stubbingMap = false } = {} } = useMapContext()
+  if (stubbingMap) {
+    return <MapStub />
+  } else {
+    return <MapComponent {...props} />
+  }
+}
+
 export default React.memo(Map)
-
-// Map.propTypes = {}
-
-// Map.defaultProps = {}
