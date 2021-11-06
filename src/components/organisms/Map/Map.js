@@ -40,7 +40,7 @@ function MapComponent({ spots }) {
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
-      mapContainerClassName={!enableControl && styles.hideGoogleMapMarks}
+      mapContainerClassName={enableControl ? '' : styles.hideGoogleMapMarks}
       center={DEFAULT_CENTER}
       zoom={DEFAULT_ZOOM}
       clickableIcons={false}
