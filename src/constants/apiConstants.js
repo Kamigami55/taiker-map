@@ -1,1 +1,1 @@
-export const NUM_LIMIT_OF_SINGLE_SPOT_TYPE = 300
+export const NUM_LIMIT_OF_SINGLE_SPOT_TYPE = 50
