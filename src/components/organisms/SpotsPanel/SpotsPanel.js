@@ -1,33 +1,53 @@
+import { useMemo } from 'react'
 import { Disclosure } from '@headlessui/react'
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md'
 
-import { SpotType, TOGGLE_SPOT, useSpotsContext } from '@/contexts/spotsContext'
+import { SpotType, TOGGLE_SPOT, TOGGLE_SPOT_TOTAL, useSpotsContext } from '@/contexts/spotsContext'
+import Checkbox from '@/components/atoms/Checkbox'
+import { CHECKBOX_STATUS } from '@/components/atoms/Checkbox/CheckboxStatus'
+import countSelectedSpots from '@/libs/countSelectedSpots'
 
 export default function SpotsPanel() {
   const {
     state: { scenicSpots, restaurants, hotels, activities },
     dispatch,
   } = useSpotsContext()
+  const scenicSpotsSummations = useMemo(() => countSelectedSpots(scenicSpots), [scenicSpots])
+  const restaurantsSummations = useMemo(() => countSelectedSpots(restaurants), [restaurants])
+  const hotelsSummations = useMemo(() => countSelectedSpots(hotels), [hotels])
+  const activitiesSummations = useMemo(() => countSelectedSpots(activities), [activities])
 
   const sections = [
     {
       name: '景點',
       spots: scenicSpots,
+      numOfSpots: scenicSpotsSummations.numOfSpots,
+      numOfSelectedSpots: scenicSpotsSummations.numOfSelectedSpots,
+      selectedStatus: scenicSpotsSummations.selectedStatus,
       type: SpotType.SCENIC_SPOT,
     },
     {
       name: '餐廳',
       spots: restaurants,
+      numOfSpots: restaurantsSummations.numOfSpots,
+      numOfSelectedSpots: restaurantsSummations.numOfSelectedSpots,
+      selectedStatus: restaurantsSummations.selectedStatus,
       type: SpotType.RESTAURANT,
     },
     {
       name: '旅館',
       spots: hotels,
+      numOfSpots: hotelsSummations.numOfSpots,
+      numOfSelectedSpots: hotelsSummations.numOfSelectedSpots,
+      selectedStatus: hotelsSummations.selectedStatus,
       type: SpotType.HOTEL,
     },
     {
       name: '活動',
       spots: activities,
+      numOfSpots: activitiesSummations.numOfSpots,
+      numOfSelectedSpots: activitiesSummations.numOfSelectedSpots,
+      selectedStatus: activitiesSummations.selectedStatus,
       type: SpotType.ACTIVITY,
     },
   ]
@@ -40,15 +60,25 @@ export default function SpotsPanel() {
             <>
               <Disclosure.Button className="flex justify-between items-center py-2 px-4 w-full bg-F4F7FB rounded-lg">
                 <div className="flex gap-2 items-center">
-                  <input
-                    // id={`filter-${spot.id}`}
-                    // name={`${section.id}[]`}
-                    // defaultValue={spot.checked}
+                  <Checkbox
                     type="checkbox"
-                    // defaultChecked={spot.checked}
+                    status={section.selectedStatus}
+                    onClick={(event) => event.stopPropagation()}
+                    onChange={() => {
+                      dispatch({
+                        type: TOGGLE_SPOT_TOTAL,
+                        payload: {
+                          type: section.type,
+                          checked:
+                            section.selectedStatus === CHECKBOX_STATUS.Checked ? false : true,
+                        },
+                      })
+                    }}
                     className="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
                   />
-                  <span className="text-1A1A1A">{section.name}</span>
+                  <span className="text-1A1A1A">
+                    {`${section.name} (${section.numOfSelectedSpots}/${section.numOfSpots})`}
+                  </span>
                 </div>
                 <span className="flex items-center ml-6">
                   {open ? (
@@ -63,10 +93,9 @@ export default function SpotsPanel() {
                 <div className="space-y-4">
                   {section.spots.map((spot) => (
                     <div key={spot.id} className="flex items-center">
-                      <input
+                      <Checkbox
                         id={`filter-${spot.id}`}
-                        type="checkbox"
-                        checked={spot.selected}
+                        status={spot.selected ? CHECKBOX_STATUS.Checked : CHECKBOX_STATUS.Unchecked}
                         onChange={() => {
                           dispatch({
                             type: TOGGLE_SPOT,

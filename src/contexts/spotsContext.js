@@ -27,8 +27,16 @@ export const SpotType = {
   ACTIVITY: 'ACTIVITY',
 }
 
+const SpotTypeToListName = {
+  [SpotType.SCENIC_SPOT]: 'scenicSpots',
+  [SpotType.RESTAURANT]: 'restaurants',
+  [SpotType.HOTEL]: 'hotels',
+  [SpotType.ACTIVITY]: 'activities',
+}
+
 export const SET_SPOTS = 'SET_SPOTS'
 export const TOGGLE_SPOT = 'TOGGLE_SPOT'
+export const TOGGLE_SPOT_TOTAL = 'TOGGLE_SPOT_TOTAL'
 
 function spotsReducer(state, { type, payload = {} } = {}) {
   switch (type) {
@@ -52,27 +60,10 @@ function spotsReducer(state, { type, payload = {} } = {}) {
         ),
       }
     }
+
     case TOGGLE_SPOT: {
       const { id, type } = payload
-      let targetSpotListName
-      switch (type) {
-        case SpotType.SCENIC_SPOT: {
-          targetSpotListName = 'scenicSpots'
-          break
-        }
-        case SpotType.RESTAURANT: {
-          targetSpotListName = 'restaurants'
-          break
-        }
-        case SpotType.HOTEL: {
-          targetSpotListName = 'hotels'
-          break
-        }
-        case SpotType.ACTIVITY: {
-          targetSpotListName = 'activities'
-          break
-        }
-      }
+      const targetSpotListName = SpotTypeToListName[type]
       return {
         ...state,
         [targetSpotListName]: state[targetSpotListName].map((spot) =>
@@ -81,6 +72,19 @@ function spotsReducer(state, { type, payload = {} } = {}) {
         spots: state.spots.map((spot) =>
           spot.id === id ? { ...spot, selected: !spot.selected } : spot
         ),
+      }
+    }
+
+    case TOGGLE_SPOT_TOTAL: {
+      const { type, checked } = payload
+      const targetSpotListName = SpotTypeToListName[type]
+      const newTargetSpotList = state[targetSpotListName].map((spot) => ({
+        ...spot,
+        selected: checked,
+      }))
+      return {
+        ...state,
+        [targetSpotListName]: newTargetSpotList,
       }
     }
     default: {
