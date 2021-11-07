@@ -78,6 +78,9 @@ function spotsReducer(state, { type, payload = {} } = {}) {
         [targetSpotListName]: state[targetSpotListName].map((spot) =>
           spot.id === id ? { ...spot, selected: !spot.selected } : spot
         ),
+        spots: state.spots.map((spot) =>
+          spot.id === id ? { ...spot, selected: !spot.selected } : spot
+        ),
       }
     }
     default: {

@@ -59,19 +59,21 @@ function MapComponent() {
       }}
       onIdle={updateMapControl}
     >
-      {spots?.map((spot) => (
-        <Marker
-          key={spot.id}
-          position={spot.position}
-          icon={{
-            url: PIN_ICON_SRC,
-            size: { width: 64, height: 64 },
-            anchor: { x: 16, y: 32 },
-            scaledSize: { width: 32, height: 32 },
-          }}
-        />
-      ))}
-      <></>
+      {spots?.map((spot) => {
+        if (!spot.selected) return null
+        return (
+          <Marker
+            key={spot.id}
+            position={spot.position}
+            icon={{
+              url: PIN_ICON_SRC,
+              size: { width: 64, height: 64 },
+              anchor: { x: 16, y: 32 },
+              scaledSize: { width: 32, height: 32 },
+            }}
+          />
+        )
+      })}
     </GoogleMap>
   ) : (
     <></>
