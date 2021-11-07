@@ -16,11 +16,19 @@ const DefaultReducerState = {
 function transformSpots(spots) {
   return spots.map((spot) => ({
     ...spot,
-    selected: false,
+    selected: true,
   }))
 }
 
+export const SpotType = {
+  SCENIC_SPOT: 'SCENIC_SPOT',
+  RESTAURANT: 'RESTAURANT',
+  HOTEL: 'HOTEL',
+  ACTIVITY: 'ACTIVITY',
+}
+
 export const SET_SPOTS = 'SET_SPOTS'
+export const TOGGLE_SPOT = 'TOGGLE_SPOT'
 
 function spotsReducer(state, { type, payload = {} } = {}) {
   switch (type) {
@@ -41,6 +49,34 @@ function spotsReducer(state, { type, payload = {} } = {}) {
           restaurantsTransformed,
           hotelsTransformed,
           activitiesTransformed
+        ),
+      }
+    }
+    case TOGGLE_SPOT: {
+      const { id, type } = payload
+      let targetSpotListName
+      switch (type) {
+        case SpotType.SCENIC_SPOT: {
+          targetSpotListName = 'scenicSpots'
+          break
+        }
+        case SpotType.RESTAURANT: {
+          targetSpotListName = 'restaurants'
+          break
+        }
+        case SpotType.HOTEL: {
+          targetSpotListName = 'hotels'
+          break
+        }
+        case SpotType.ACTIVITY: {
+          targetSpotListName = 'activities'
+          break
+        }
+      }
+      return {
+        ...state,
+        [targetSpotListName]: state[targetSpotListName].map((spot) =>
+          spot.id === id ? { ...spot, selected: !spot.selected } : spot
         ),
       }
     }

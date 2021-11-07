@@ -1,29 +1,34 @@
 import { Disclosure } from '@headlessui/react'
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md'
 
-import { useSpotsContext } from '@/contexts/spotsContext'
+import { SpotType, TOGGLE_SPOT, useSpotsContext } from '@/contexts/spotsContext'
 
 export default function SpotsPanel() {
   const {
     state: { scenicSpots, restaurants, hotels, activities },
+    dispatch,
   } = useSpotsContext()
 
   const sections = [
     {
       name: '景點',
       spots: scenicSpots,
+      type: SpotType.SCENIC_SPOT,
     },
     {
       name: '餐廳',
       spots: restaurants,
+      type: SpotType.RESTAURANT,
     },
     {
       name: '旅館',
       spots: hotels,
+      type: SpotType.HOTEL,
     },
     {
       name: '活動',
       spots: activities,
+      type: SpotType.ACTIVITY,
     },
   ]
 
@@ -60,13 +65,20 @@ export default function SpotsPanel() {
                     <div key={spot.id} className="flex items-center">
                       <input
                         id={`filter-${spot.id}`}
-                        name={`${section.id}[]`}
-                        defaultValue={spot.checked}
                         type="checkbox"
-                        defaultChecked={spot.checked}
+                        checked={spot.selected}
+                        onChange={() => {
+                          dispatch({
+                            type: TOGGLE_SPOT,
+                            payload: {
+                              id: spot.id,
+                              type: section.type,
+                            },
+                          })
+                        }}
                         className="flex-shrink-0 w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
                       />
-                      <label htmlFor={`filter-${spot.spot}`} className="ml-3 text-sm text-gray-600">
+                      <label htmlFor={`filter-${spot.id}`} className="ml-3 text-sm text-gray-600">
                         {spot.name}
                       </label>
                     </div>
