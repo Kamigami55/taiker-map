@@ -27,15 +27,18 @@ import React from 'react'
 import { MapProvider, MockReducerState } from '../src/contexts/mapContext'
 import { SpotsProvider } from '../src/contexts/spotsContext'
 import { ExportProvider } from '../src/contexts/exportContext'
+import { StyleProvider } from '../src/contexts/styleContext'
 
 export const decorators = [
   (Story) => (
-    <ExportProvider>
-      <SpotsProvider>
-        <MapProvider defaultState={MockReducerState}>
-          <Story />
-        </MapProvider>
-      </SpotsProvider>
-    </ExportProvider>
+    <SpotsProvider>
+      <MapProvider defaultState={MockReducerState}>
+        <StyleProvider>
+          <ExportProvider>
+            <Story />
+          </ExportProvider>
+        </StyleProvider>
+      </MapProvider>
+    </SpotsProvider>
   ),
 ]

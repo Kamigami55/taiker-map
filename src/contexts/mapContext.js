@@ -2,7 +2,6 @@ import React from 'react'
 
 import getMapRadiusFromBounds from '@/libs/getMapRadiusFromBounds'
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from '@/constants/mapConstants'
-import MapStyles from '@/mapStyles'
 
 const MapContext = React.createContext()
 
@@ -12,7 +11,6 @@ const DefaultReducerState = {
   center: DEFAULT_CENTER,
   zoom: DEFAULT_ZOOM,
   radius: 0, // radius of map view in meter
-  style: MapStyles[0],
   enableControl: true,
 }
 export const MockReducerState = {
@@ -22,7 +20,6 @@ export const MockReducerState = {
 
 export const UPDATE_MAP_CONTROL = 'UPDATE_MAP_CONTROL'
 export const SET_MAP = 'SET_MAP'
-export const CHANGE_MAP_STYLE = 'CHANGE_MAP_STYLE'
 export const TOGGLE_MAP_CONTROL = 'TOGGLE_MAP_CONTROL'
 
 function mapReducer(state, { type, payload = {} } = {}) {
@@ -47,12 +44,6 @@ function mapReducer(state, { type, payload = {} } = {}) {
       return {
         ...state,
         map: payload?.map,
-      }
-    }
-    case CHANGE_MAP_STYLE: {
-      return {
-        ...state,
-        style: payload?.style,
       }
     }
     case TOGGLE_MAP_CONTROL: {

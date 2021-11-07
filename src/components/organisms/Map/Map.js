@@ -4,6 +4,7 @@ import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
 
 import { NEXT_PUBLIC_GOOGLE_MAP_API_KEY } from '@/constants/envValues'
 import { useMapContext, UPDATE_MAP_CONTROL, SET_MAP } from '@/contexts/mapContext'
+import { useStyleContext } from '@/contexts/styleContext'
 import { useSpotsContext } from '@/contexts/spotsContext'
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from '@/constants/mapConstants'
 
@@ -23,7 +24,10 @@ function MapComponent() {
     googleMapsApiKey: NEXT_PUBLIC_GOOGLE_MAP_API_KEY,
   })
 
-  const { state: { enableControl, style } = {}, dispatch } = useMapContext()
+  const { state: { enableControl } = {}, dispatch } = useMapContext()
+  const {
+    state: { style },
+  } = useStyleContext()
   const { state: { spots } = {} } = useSpotsContext()
 
   const onLoad = React.useCallback((map) => {

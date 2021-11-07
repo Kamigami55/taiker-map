@@ -7,6 +7,7 @@ import { SET_SPOTS, SpotsProvider, useSpotsContext } from '@/contexts/spotsConte
 // import { useGeolocation } from '@/hooks/useGeolocation'
 import { useAllTourismSpots } from '@/api/useAllTourismSpots'
 import { ExportProvider } from '@/contexts/exportContext'
+import { StyleProvider } from '@/contexts/styleContext'
 
 function IndexPage() {
   // const [position] = useGeolocation()
@@ -37,9 +38,11 @@ export default function IndexPageWithProvider() {
   return (
     <SpotsProvider>
       <MapProvider>
-        <ExportProvider>
-          <IndexPage />
-        </ExportProvider>
+        <StyleProvider>
+          <ExportProvider>
+            <IndexPage />
+          </ExportProvider>
+        </StyleProvider>
       </MapProvider>
     </SpotsProvider>
   )

@@ -1,8 +1,8 @@
-import { CHANGE_MAP_STYLE, useMapContext } from '@/contexts/mapContext'
+import { CHANGE_MAP_STYLE, useStyleContext } from '@/contexts/styleContext'
 import MapStyles from '@/mapStyles'
 
 export default function MapStyleSelect() {
-  const { state, dispatch } = useMapContext()
+  const { state, dispatch } = useStyleContext()
   const handleChange = (event) => {
     dispatch({
       type: CHANGE_MAP_STYLE,
