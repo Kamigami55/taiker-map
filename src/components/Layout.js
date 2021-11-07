@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types'
 
-import Footer from '@/components/organisms/Footer'
 import Meta from '@/components/Meta'
 
 export default function Layout({ children }) {
@@ -10,7 +9,6 @@ export default function Layout({ children }) {
       <div className="min-h-screen">
         <main>{children}</main>
       </div>
-      <Footer />
     </>
   )
 }
