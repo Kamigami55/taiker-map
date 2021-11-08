@@ -1,0 +1,12 @@
+.rangeInput {
+  &::-webkit-slider-thumb {
+    width: 15px;
+    height: 15px;
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: ew-resize;
+    background: #FFF;
+    box-shadow: -405px 0 0 400px #605E5C;
+    border-radius: 50%;
+  }
+}

@@ -1,5 +1,5 @@
 import { CHANGE_MAP_STYLE, useStyleContext } from '@/contexts/styleContext'
-import MapStyles from '@/mapStyles'
+import MapStyles from '@/mapStyles/themes'
 
 export default function MapStyleSelect() {
   const { state, dispatch } = useStyleContext()

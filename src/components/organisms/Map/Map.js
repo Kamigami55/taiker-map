@@ -7,6 +7,7 @@ import { useMapContext, UPDATE_MAP_CONTROL, SET_MAP } from '@/contexts/mapContex
 import { useStyleContext } from '@/contexts/styleContext'
 import { useSpotsContext } from '@/contexts/spotsContext'
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from '@/constants/mapConstants'
+import joinAllArrays from '@/libs/joinAllArrays'
 
 import styles from './Map.module.scss'
 import MapStub from './MapStub'
@@ -26,7 +27,7 @@ function MapComponent() {
 
   const { state: { enableControl } = {}, dispatch } = useMapContext()
   const {
-    state: { style },
+    state: { style, roadsDensity },
   } = useStyleContext()
   const { state: { spots } = {} } = useSpotsContext()
 
@@ -41,6 +42,11 @@ function MapComponent() {
   const updateMapControl = debounce(() => {
     dispatch({ type: UPDATE_MAP_CONTROL })
   }, 1500)
+
+  const mergedStyles = React.useMemo(
+    () => joinAllArrays(style.config, roadsDensity.config),
+    [style.config, roadsDensity.config]
+  )
 
   return isLoaded ? (
     <GoogleMap
@@ -59,7 +65,7 @@ function MapComponent() {
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
-        styles: style.config,
+        styles: mergedStyles,
       }}
       onIdle={updateMapControl}
     >
