@@ -1,6 +1,6 @@
 import React from 'react'
 
-import MapStyles from '@/mapStyles/themes'
+import MapThemes from '@/mapStyles/themes'
 import RoadsDensityConfigs from '@/mapStyles/density/RoadsDensityConfigs'
 import LandmarksDensityConfigs from '@/mapStyles/density/LandmarksDensityConfigs'
 import LabelsDensityConfigs from '@/mapStyles/density/LabelsDensityConfigs'
@@ -8,21 +8,22 @@ import LabelsDensityConfigs from '@/mapStyles/density/LabelsDensityConfigs'
 const StyleContext = React.createContext()
 
 const DefaultReducerState = {
-  style: MapStyles[0],
+  theme: MapThemes[0],
   roadsDensity: RoadsDensityConfigs[RoadsDensityConfigs.length - 1],
   landmarksDensity: LandmarksDensityConfigs[LandmarksDensityConfigs.length - 1],
   labelsDensity: LabelsDensityConfigs[LabelsDensityConfigs.length - 1],
 }
 
-export const CHANGE_MAP_STYLE = 'CHANGE_MAP_STYLE'
+export const CHANGE_MAP_THEME = 'CHANGE_MAP_THEME'
 export const CHANGE_DENSITY = 'CHANGE_DENSITY'
 
 function styleReducer(state, { type, payload = {} } = {}) {
   switch (type) {
-    case CHANGE_MAP_STYLE: {
+    case CHANGE_MAP_THEME: {
+      const { theme } = payload
       return {
         ...state,
-        style: payload?.style,
+        theme,
       }
     }
 

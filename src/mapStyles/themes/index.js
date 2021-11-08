@@ -1,11 +1,11 @@
-import StyleNight from './StyleNight'
-import StyleRetro from './StyleRetro'
-import StyleStandard from './StyleStandard'
+import ThemeNight from './ThemeNight'
+import ThemeRetro from './ThemeRetro'
+import ThemeStandard from './ThemeStandard'
 
-const MapStyles = [
-  { id: '1', name: '標準', config: StyleStandard },
-  { id: '2', name: '懷舊', config: StyleRetro },
-  { id: '3', name: '深夜', config: StyleNight },
+const MapThemes = [
+  { id: '1', name: '標準', config: ThemeStandard },
+  { id: '2', name: '懷舊', config: ThemeRetro },
+  { id: '3', name: '深夜', config: ThemeNight },
 ]
 
-export default MapStyles
+export default MapThemes

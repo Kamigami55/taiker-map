@@ -1,4 +1,4 @@
-const StyleNight = [
+const ThemeNight = [
   {
     elementType: 'geometry',
     stylers: [
@@ -160,4 +160,4 @@ const StyleNight = [
   },
 ]
 
-export default StyleNight
+export default ThemeNight

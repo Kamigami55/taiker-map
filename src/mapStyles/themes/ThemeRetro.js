@@ -1,4 +1,4 @@
-const StyleRetro = [
+const ThemeRetro = [
   {
     elementType: 'geometry',
     stylers: [
@@ -214,4 +214,4 @@ const StyleRetro = [
   },
 ]
 
-export default StyleRetro
+export default ThemeRetro
