@@ -2,16 +2,18 @@ import React from 'react'
 
 import MapStyles from '@/mapStyles/themes'
 import RoadsDensityConfigs from '@/mapStyles/density/RoadsDensityConfigs'
+import LandmarksDensityConfigs from '@/mapStyles/density/LandmarksDensityConfigs'
 
 const StyleContext = React.createContext()
 
 const DefaultReducerState = {
   style: MapStyles[0],
   roadsDensity: RoadsDensityConfigs[RoadsDensityConfigs.length - 1],
+  landmarksDensity: LandmarksDensityConfigs[LandmarksDensityConfigs.length - 1],
 }
 
 export const CHANGE_MAP_STYLE = 'CHANGE_MAP_STYLE'
-export const CHANGE_ROADS_DENSITY = 'CHANGE_ROADS_DENSITY'
+export const CHANGE_DENSITY = 'CHANGE_DENSITY'
 
 function styleReducer(state, { type, payload = {} } = {}) {
   switch (type) {
@@ -22,11 +24,11 @@ function styleReducer(state, { type, payload = {} } = {}) {
       }
     }
 
-    case CHANGE_ROADS_DENSITY: {
-      const { value } = payload
+    case CHANGE_DENSITY: {
+      const { stateName, option } = payload
       return {
         ...state,
-        roadsDensity: RoadsDensityConfigs.find((density) => density.value === value),
+        [stateName]: option,
       }
     }
 

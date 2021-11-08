@@ -1,47 +1,56 @@
 import PropTypes from 'prop-types'
 
 import RangeInput from '@/components/atoms/RangeInput'
-import { CHANGE_ROADS_DENSITY, useStyleContext } from '@/contexts/styleContext'
+import { CHANGE_DENSITY, useStyleContext } from '@/contexts/styleContext'
 import RoadsDensityConfigs from '@/mapStyles/density/RoadsDensityConfigs'
+import LandmarksDensityConfigs from '@/mapStyles/density/LandmarksDensityConfigs'
 
 import DensitySelectType from './DensitySelectType'
 
-const TypeToConfigs = {
+const TypeToSelectConfigs = {
   [DensitySelectType.ROADS]: {
     label: '道路密度',
-    configs: RoadsDensityConfigs,
+    options: RoadsDensityConfigs,
     stateName: 'roadsDensity',
-    actionType: CHANGE_ROADS_DENSITY,
+  },
+  [DensitySelectType.LANDMARKS]: {
+    label: '地標密度',
+    options: LandmarksDensityConfigs,
+    stateName: 'landmarksDensity',
   },
 }
 
 export default function DensitySelect({ type }) {
-  const config = TypeToConfigs[type]
+  const selectConfig = TypeToSelectConfigs[type]
+  const { stateName, label, options } = selectConfig
   const { state, dispatch } = useStyleContext()
-  const selectedDensity = state[config.stateName]
+  const selectedDensityOption = state[stateName]
 
   const handleChange = (event) => {
     dispatch({
-      type: config.actionType,
-      payload: { value: event.target.value },
+      type: CHANGE_DENSITY,
+      payload: {
+        stateName,
+        option: options.find((option) => option.value === event.target.value),
+      },
     })
   }
 
   return (
     <div>
-      <p className="mb-3">{config.label}</p>
+      <p className="mb-3">{label}</p>
       <RangeInput
         className="w-full"
         min={0}
         max={3}
         step={1}
-        value={selectedDensity.value}
+        value={selectedDensityOption.value}
         onChange={handleChange}
       />
       <div className="flex justify-between -mx-3 mt-1 text-xs text-gray-600">
-        {config.configs.map((item) => (
-          <span key={item.name} className="w-10 text-center">
-            {item.name}
+        {options.map((option) => (
+          <span key={option.name} className="w-10 text-center">
+            {option.name}
           </span>
         ))}
       </div>
