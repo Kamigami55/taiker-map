@@ -4,6 +4,7 @@ import RangeInput from '@/components/atoms/RangeInput'
 import { CHANGE_DENSITY, useStyleContext } from '@/contexts/styleContext'
 import RoadsDensityConfigs from '@/mapStyles/density/RoadsDensityConfigs'
 import LandmarksDensityConfigs from '@/mapStyles/density/LandmarksDensityConfigs'
+import LabelsDensityConfigs from '@/mapStyles/density/LabelsDensityConfigs'
 
 import DensitySelectType from './DensitySelectType'
 
@@ -17,6 +18,11 @@ const TypeToSelectConfigs = {
     label: '地標密度',
     options: LandmarksDensityConfigs,
     stateName: 'landmarksDensity',
+  },
+  [DensitySelectType.LABELS]: {
+    label: '文字密度',
+    options: LabelsDensityConfigs,
+    stateName: 'labelsDensity',
   },
 }
 

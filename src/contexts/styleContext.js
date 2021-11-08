@@ -3,6 +3,7 @@ import React from 'react'
 import MapStyles from '@/mapStyles/themes'
 import RoadsDensityConfigs from '@/mapStyles/density/RoadsDensityConfigs'
 import LandmarksDensityConfigs from '@/mapStyles/density/LandmarksDensityConfigs'
+import LabelsDensityConfigs from '@/mapStyles/density/LabelsDensityConfigs'
 
 const StyleContext = React.createContext()
 
@@ -10,6 +11,7 @@ const DefaultReducerState = {
   style: MapStyles[0],
   roadsDensity: RoadsDensityConfigs[RoadsDensityConfigs.length - 1],
   landmarksDensity: LandmarksDensityConfigs[LandmarksDensityConfigs.length - 1],
+  labelsDensity: LabelsDensityConfigs[LabelsDensityConfigs.length - 1],
 }
 
 export const CHANGE_MAP_STYLE = 'CHANGE_MAP_STYLE'

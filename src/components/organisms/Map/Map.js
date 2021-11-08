@@ -27,7 +27,7 @@ function MapComponent() {
 
   const { state: { enableControl } = {}, dispatch } = useMapContext()
   const {
-    state: { style, roadsDensity, landmarksDensity },
+    state: { style, roadsDensity, landmarksDensity, labelsDensity },
   } = useStyleContext()
   const { state: { spots } = {} } = useSpotsContext()
 
@@ -44,8 +44,14 @@ function MapComponent() {
   }, 1500)
 
   const mergedStyles = React.useMemo(
-    () => joinAllArrays(style.config, roadsDensity.config, landmarksDensity.config),
-    [style.config, roadsDensity.config, landmarksDensity.config]
+    () =>
+      joinAllArrays(
+        style.config,
+        roadsDensity.config,
+        landmarksDensity.config,
+        labelsDensity.config
+      ),
+    [style.config, roadsDensity.config, landmarksDensity.config, labelsDensity.config]
   )
 
   return isLoaded ? (

@@ -8,6 +8,7 @@ export default function StylePanel() {
       <MapStyleSelect />
       <DensitySelect type={DensitySelectType.ROADS} />
       <DensitySelect type={DensitySelectType.LANDMARKS} />
+      <DensitySelect type={DensitySelectType.LABELS} />
     </div>
   )
 }
