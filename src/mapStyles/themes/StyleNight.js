@@ -24,28 +24,11 @@ const StyleNight = [
     ],
   },
   {
-    featureType: 'administrative',
-    elementType: 'geometry',
-    stylers: [
-      {
-        visibility: 'off',
-      },
-    ],
-  },
-  {
     featureType: 'administrative.locality',
     elementType: 'labels.text.fill',
     stylers: [
       {
         color: '#d59563',
-      },
-    ],
-  },
-  {
-    featureType: 'poi',
-    stylers: [
-      {
-        visibility: 'off',
       },
     ],
   },
@@ -64,15 +47,6 @@ const StyleNight = [
     stylers: [
       {
         color: '#263c3f',
-      },
-    ],
-  },
-  {
-    featureType: 'poi.park',
-    elementType: 'geometry.fill',
-    stylers: [
-      {
-        visibility: 'on',
       },
     ],
   },
@@ -100,15 +74,6 @@ const StyleNight = [
     stylers: [
       {
         color: '#212a37',
-      },
-    ],
-  },
-  {
-    featureType: 'road',
-    elementType: 'labels.icon',
-    stylers: [
-      {
-        visibility: 'off',
       },
     ],
   },
@@ -145,14 +110,6 @@ const StyleNight = [
     stylers: [
       {
         color: '#f3d19c',
-      },
-    ],
-  },
-  {
-    featureType: 'transit',
-    stylers: [
-      {
-        visibility: 'off',
       },
     ],
   },

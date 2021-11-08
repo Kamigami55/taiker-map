@@ -25,15 +25,6 @@ const StyleRetro = [
   },
   {
     featureType: 'administrative',
-    elementType: 'geometry',
-    stylers: [
-      {
-        visibility: 'off',
-      },
-    ],
-  },
-  {
-    featureType: 'administrative',
     elementType: 'geometry.stroke',
     stylers: [
       {
@@ -70,14 +61,6 @@ const StyleRetro = [
   },
   {
     featureType: 'poi',
-    stylers: [
-      {
-        visibility: 'off',
-      },
-    ],
-  },
-  {
-    featureType: 'poi',
     elementType: 'geometry',
     stylers: [
       {
@@ -101,9 +84,6 @@ const StyleRetro = [
       {
         color: '#a5b076',
       },
-      {
-        visibility: 'on',
-      },
     ],
   },
   {
@@ -121,15 +101,6 @@ const StyleRetro = [
     stylers: [
       {
         color: '#f5f1e6',
-      },
-    ],
-  },
-  {
-    featureType: 'road',
-    elementType: 'labels.icon',
-    stylers: [
-      {
-        visibility: 'off',
       },
     ],
   },
@@ -184,14 +155,6 @@ const StyleRetro = [
     stylers: [
       {
         color: '#806b63',
-      },
-    ],
-  },
-  {
-    featureType: 'transit',
-    stylers: [
-      {
-        visibility: 'off',
       },
     ],
   },
