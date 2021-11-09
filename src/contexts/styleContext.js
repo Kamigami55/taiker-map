@@ -12,10 +12,15 @@ const DefaultReducerState = {
   roadsDensity: RoadsDensityConfigs[RoadsDensityConfigs.length - 1],
   landmarksDensity: LandmarksDensityConfigs[LandmarksDensityConfigs.length - 1],
   labelsDensity: LabelsDensityConfigs[LabelsDensityConfigs.length - 1],
+  canvasSize: {
+    width: 800,
+    height: 500,
+  },
 }
 
 export const CHANGE_MAP_THEME = 'CHANGE_MAP_THEME'
 export const CHANGE_DENSITY = 'CHANGE_DENSITY'
+export const CHANGE_CANVAS_SIZE = 'CHANGE_CANVAS_SIZE'
 
 function styleReducer(state, { type, payload = {} } = {}) {
   switch (type) {
@@ -32,6 +37,17 @@ function styleReducer(state, { type, payload = {} } = {}) {
       return {
         ...state,
         [stateName]: option,
+      }
+    }
+
+    case CHANGE_CANVAS_SIZE: {
+      const { width, height } = payload
+      return {
+        ...state,
+        canvasSize: {
+          width: width || state.canvasSize.width,
+          height: height || state.canvasSize.height,
+        },
       }
     }
 

@@ -14,11 +14,6 @@ import MapStub from './MapStub'
 
 const PIN_ICON_SRC = '/images/pin.png'
 
-const containerStyle = {
-  width: '800px',
-  height: '600px',
-}
-
 function MapComponent() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -27,7 +22,7 @@ function MapComponent() {
 
   const { state: { enableControl } = {}, dispatch } = useMapContext()
   const {
-    state: { theme, roadsDensity, landmarksDensity, labelsDensity },
+    state: { theme, roadsDensity, landmarksDensity, labelsDensity, canvasSize },
   } = useStyleContext()
   const { state: { spots } = {} } = useSpotsContext()
 
@@ -56,7 +51,10 @@ function MapComponent() {
 
   return isLoaded ? (
     <GoogleMap
-      mapContainerStyle={containerStyle}
+      mapContainerStyle={{
+        width: canvasSize.width + 'px',
+        height: canvasSize.height + 'px',
+      }}
       mapContainerClassName={enableControl ? '' : styles.hideGoogleMapMarks}
       center={DEFAULT_CENTER}
       zoom={DEFAULT_ZOOM}
