@@ -6,8 +6,9 @@ export function ExportProvider({ children }) {
   const canvasRef = React.useRef(null)
   const [previewUrl, setPreviewUrl] = React.useState(null)
 
-  const handleExport = React.useCallback(async () => {
+  const handleGeneratePreview = React.useCallback(async () => {
     if (canvasRef.current === null) return
+    setPreviewUrl(null)
 
     const html2canvas = (await import('html2canvas')).default
     html2canvas(canvasRef.current, {
@@ -15,14 +16,18 @@ export function ExportProvider({ children }) {
     }).then(function (canvas) {
       const img = canvas.toDataURL('image/png')
       setPreviewUrl(img)
-      const link = document.createElement('a')
-      link.download = 'map.png'
-      link.href = img
-      link.click()
     })
   }, [canvasRef])
 
-  const value = { canvasRef, previewUrl, handleExport }
+  const handleDownload = React.useCallback(async () => {
+    if (previewUrl === null) return
+    const link = document.createElement('a')
+    link.download = 'map.png'
+    link.href = previewUrl
+    link.click()
+  }, [previewUrl])
+
+  const value = { canvasRef, previewUrl, handleGeneratePreview, handleDownload }
   return <ExportContext.Provider value={value}>{children}</ExportContext.Provider>
 }
 
