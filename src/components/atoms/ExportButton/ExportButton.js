@@ -1,22 +1,36 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { Popover } from '@headlessui/react'
 import { usePopper } from 'react-popper'
 
 import { BiExport } from 'react-icons/bi'
 
 import { useExportContext } from '@/contexts/exportContext'
+import { TOGGLE_MAP_CONTROL, useMapContext } from '@/contexts/mapContext'
 
 export default function ExportButton() {
   const { previewUrl, handleGeneratePreview, handleDownload } = useExportContext()
+  const {
+    state: { enableControl: mapControlEnabled },
+    dispatch: mapDispatch,
+  } = useMapContext()
+
+  // Popper.js related state
   let [referenceElement, setReferenceElement] = useState()
   let [popperElement, setPopperElement] = useState()
   let { styles, attributes } = usePopper(referenceElement, popperElement)
+
+  const handleOpen = useCallback(() => {
+    if (mapControlEnabled) {
+      mapDispatch({ type: TOGGLE_MAP_CONTROL })
+    }
+    handleGeneratePreview()
+  }, [mapControlEnabled])
 
   return (
     <Popover className="relative">
       <button
         className="text-black hover:bg-gray-200 active:bg-gray-300 rounded-lg"
-        onClick={handleGeneratePreview}
+        onClick={handleOpen}
       >
         <Popover.Button
           as="div"
