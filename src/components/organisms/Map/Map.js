@@ -15,8 +15,8 @@ import MapStub from './MapStub'
 const PIN_ICON_SRC = '/images/pin.png'
 
 const containerStyle = {
-  width: '400px',
-  height: '400px',
+  width: '800px',
+  height: '600px',
 }
 
 function MapComponent() {

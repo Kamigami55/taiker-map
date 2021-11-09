@@ -8,7 +8,7 @@ export default function IndexPageTemplate() {
   const { previewUrl } = useExportContext()
 
   return (
-    <div className="flex flex-row min-h-screen text-gray-800 bg-gray-100">
+    <div className="flex flex-row min-h-screen text-gray-800 bg-F4F7FB">
       <SideBar />
       <main className="flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in main">
         <TopBar />

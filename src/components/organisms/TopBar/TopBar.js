@@ -1,12 +1,16 @@
 import ExportButton from '@/components/atoms/ExportButton'
 import MapLockControl from '@/components/atoms/MapLockControl'
+import SizeControl from '@/components/atoms/SizeControl'
 
 export default function TopBar() {
   return (
-    <header className="p-4 bg-white shadow">
-      <div className="flex flex-row gap-4 items-center">
-        <MapLockControl />
+    <header className="flex gap-4 justify-between items-center py-7 px-6">
+      <div>
+        <SizeControl />
+      </div>
+      <div className="flex gap-2">
         <ExportButton />
+        <MapLockControl />
       </div>
     </header>
   )
