@@ -12,11 +12,12 @@ const DefaultReducerState = {
   spots: [],
 }
 
-// Add selected field to each spot
-function transformSpots(spots) {
+// Add type & selected field to each spot
+function transformSpots(spots, type) {
   return spots.map((spot) => ({
     ...spot,
     selected: true,
+    type,
   }))
 }
 
@@ -42,10 +43,10 @@ function spotsReducer(state, { type, payload = {} } = {}) {
   switch (type) {
     case SET_SPOTS: {
       const { scenicSpots, restaurants, hotels, activities } = payload
-      const scenicSpotsTransformed = transformSpots(scenicSpots)
-      const restaurantsTransformed = transformSpots(restaurants)
-      const hotelsTransformed = transformSpots(hotels)
-      const activitiesTransformed = transformSpots(activities)
+      const scenicSpotsTransformed = transformSpots(scenicSpots, SpotType.SCENIC_SPOT)
+      const restaurantsTransformed = transformSpots(restaurants, SpotType.RESTAURANT)
+      const hotelsTransformed = transformSpots(hotels, SpotType.HOTEL)
+      const activitiesTransformed = transformSpots(activities, SpotType.ACTIVITY)
       return {
         ...state,
         scenicSpots: scenicSpotsTransformed,
@@ -85,6 +86,9 @@ function spotsReducer(state, { type, payload = {} } = {}) {
       return {
         ...state,
         [targetSpotListName]: newTargetSpotList,
+        spots: state.spots.map((spot) =>
+          spot.type === type ? { ...spot, selected: checked } : spot
+        ),
       }
     }
     default: {
