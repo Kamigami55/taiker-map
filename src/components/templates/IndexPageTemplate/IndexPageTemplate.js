@@ -1,18 +1,15 @@
-import SideBar from '@/components/organisms/SideBar'
-import TopBar from '@/components/organisms/TopBar'
-import CanvasContainer from '@/components/organisms/CanvasContainer'
-import Canvas from '@/components/organisms/Canvas'
+import Footer from '@/components/organisms/Footer'
+import Header from '@/components/organisms/Header'
+import HeroSection from '@/components/organisms/HeroSection'
+import ShowcaseSection from '@/components/organisms/ShowcaseSection'
 
 export default function IndexPageTemplate() {
   return (
-    <div className="flex flex-row min-h-screen text-gray-800 bg-F4F7FB">
-      <SideBar />
-      <main className="flex flex-col flex-grow -ml-64 md:ml-0 transition-all duration-150 ease-in">
-        <TopBar />
-        <CanvasContainer>
-          <Canvas />
-        </CanvasContainer>
-      </main>
+    <div className="bg-F4F7FB">
+      <Header />
+      <HeroSection />
+      <ShowcaseSection />
+      <Footer />
     </div>
   )
 }

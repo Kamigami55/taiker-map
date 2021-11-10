@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import cn from 'classnames'
+import Link from 'next/link'
 
 import { FaListUl } from 'react-icons/fa'
 import { BsMap } from 'react-icons/bs'
@@ -19,10 +20,12 @@ export default function SideBar() {
 
   return (
     <aside className={cn('w-[280px] h-screen bg-white p-4 flex flex-col', styles.sidebar)}>
-      <div className="inline-flex flex-row items-center mb-6 text-172A50">
-        <IoMdMap className="w-[40px] h-[40px]" />
-        <span className="ml-1 text-2xl font-bold leading-10 text-1A1A1A">Maper</span>
-      </div>
+      <Link href="/">
+        <div className="inline-flex flex-row items-center mb-6 text-172A50 cursor-pointer">
+          <IoMdMap className="w-[40px] h-[40px]" />
+          <span className="ml-1 text-2xl font-bold leading-10 text-1A1A1A">Maper</span>
+        </div>
+      </Link>
 
       <div className="flex gap-2 content-evenly items-center mb-4">
         <ToggleButton
