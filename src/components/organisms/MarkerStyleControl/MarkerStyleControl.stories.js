@@ -3,9 +3,7 @@ import MarkerStyleControl from './MarkerStyleControl'
 const Template = (args) => <MarkerStyleControl {...args} />
 
 export const Default = Template.bind({})
-Default.args = {
-  aProp: 'placeholder',
-}
+Default.args = {}
 
 export default {
   title: 'organisms/MarkerStyleControl',

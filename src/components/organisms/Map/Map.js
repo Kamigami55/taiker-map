@@ -27,7 +27,7 @@ function MapComponent() {
       landmarksDensity,
       labelsDensity,
       canvasSize,
-      markerStyle: { shape: markerShape },
+      markerStyle: { shape: markerShape, icon: markerIconCodeOfTypes },
     },
   } = useStyleContext()
   const { state: { spots } = {} } = useSpotsContext()
@@ -80,7 +80,15 @@ function MapComponent() {
       onIdle={updateMapControl}
     >
       {spots?.map(
-        (spot) => spot.selected && <MarkerCustom key={spot.id} spot={spot} shape={markerShape} />
+        (spot) =>
+          spot.selected && (
+            <MarkerCustom
+              key={spot.id}
+              spot={spot}
+              shape={markerShape}
+              labelIconText={markerIconCodeOfTypes[spot.type]}
+            />
+          )
       )}
     </GoogleMap>
   ) : (

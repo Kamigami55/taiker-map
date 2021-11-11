@@ -14,6 +14,9 @@ module.exports = {
       boxShadow: {
         '4px': '4px 4px 10px rgba(0, 0, 0, 0.1)',
       },
+      fontFamily: {
+        'material-icons': 'Material Icons',
+      },
     },
   },
   variants: {

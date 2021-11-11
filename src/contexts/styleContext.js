@@ -5,6 +5,13 @@ import RoadsDensityConfigs from '@/mapStyles/density/RoadsDensityConfigs'
 import LandmarksDensityConfigs from '@/mapStyles/density/LandmarksDensityConfigs'
 import LabelsDensityConfigs from '@/mapStyles/density/LabelsDensityConfigs'
 import { MARKER_SHAPE_PIN } from '@/components/atoms/MarkerCustom/markerShape'
+import {
+  DEFAULT_ACTIVITY_ICON,
+  DEFAULT_HOTEL_ICON,
+  DEFAULT_RESTAURANT_ICON,
+  DEFAULT_SCENIC_SPOT_ICON,
+} from '@/components/atoms/MarkerCustom/markerIcon'
+import { SpotType } from '@/contexts/spotsContext'
 
 const StyleContext = React.createContext()
 
@@ -19,6 +26,12 @@ const DefaultReducerState = {
   },
   markerStyle: {
     shape: MARKER_SHAPE_PIN,
+    icon: {
+      [SpotType.SCENIC_SPOT]: DEFAULT_SCENIC_SPOT_ICON,
+      [SpotType.RESTAURANT]: DEFAULT_RESTAURANT_ICON,
+      [SpotType.HOTEL]: DEFAULT_HOTEL_ICON,
+      [SpotType.ACTIVITY]: DEFAULT_ACTIVITY_ICON,
+    },
   },
 }
 
@@ -26,6 +39,7 @@ export const CHANGE_MAP_THEME = 'CHANGE_MAP_THEME'
 export const CHANGE_DENSITY = 'CHANGE_DENSITY'
 export const CHANGE_CANVAS_SIZE = 'CHANGE_CANVAS_SIZE'
 export const CHANGE_MARKER_SHAPE = 'CHANGE_MARKER_SHAPE'
+export const CHANGE_MARKER_ICON = 'CHANGE_MARKER_ICON'
 
 function styleReducer(state, { type, payload = {} } = {}) {
   switch (type) {
@@ -63,6 +77,20 @@ function styleReducer(state, { type, payload = {} } = {}) {
         markerStyle: {
           ...state.markerStyle,
           shape,
+        },
+      }
+    }
+
+    case CHANGE_MARKER_ICON: {
+      const { icon, type } = payload
+      return {
+        ...state,
+        markerStyle: {
+          ...state.markerStyle,
+          icon: {
+            ...state.markerStyle.icon,
+            [type]: icon,
+          },
         },
       }
     }

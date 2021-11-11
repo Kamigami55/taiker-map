@@ -5,7 +5,7 @@ import MarkerStyleControl from '@/components/organisms/MarkerStyleControl'
 
 export default function StylePanel() {
   return (
-    <div>
+    <div className="overflow-y-auto flex-grow">
       <MapThemeSelect />
       <DensitySelect type={DensitySelectType.ROADS} />
       <DensitySelect type={DensitySelectType.LANDMARKS} />
