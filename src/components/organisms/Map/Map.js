@@ -1,6 +1,6 @@
 import React from 'react'
 import { debounce } from 'lodash'
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 
 import { NEXT_PUBLIC_GOOGLE_MAP_API_KEY } from '@/constants/envValues'
 import { useMapContext, UPDATE_MAP_CONTROL, SET_MAP } from '@/contexts/mapContext'
@@ -8,11 +8,10 @@ import { useStyleContext } from '@/contexts/styleContext'
 import { useSpotsContext } from '@/contexts/spotsContext'
 import { DEFAULT_CENTER, DEFAULT_ZOOM } from '@/constants/mapConstants'
 import joinAllArrays from '@/libs/joinAllArrays'
+import MarkerCustom from '@/components/atoms/MarkerCustom'
 
 import styles from './Map.module.scss'
 import MapStub from './MapStub'
-
-const PIN_ICON_SRC = '/images/pin.png'
 
 function MapComponent() {
   const { isLoaded } = useJsApiLoader({
@@ -73,21 +72,7 @@ function MapComponent() {
       }}
       onIdle={updateMapControl}
     >
-      {spots?.map((spot) => {
-        if (!spot.selected) return null
-        return (
-          <Marker
-            key={spot.id}
-            position={spot.position}
-            icon={{
-              url: PIN_ICON_SRC,
-              size: { width: 64, height: 64 },
-              anchor: { x: 16, y: 32 },
-              scaledSize: { width: 32, height: 32 },
-            }}
-          />
-        )
-      })}
+      {spots?.map((spot) => spot.selected && <MarkerCustom key={spot.id} spot={spot} />)}
     </GoogleMap>
   ) : (
     <></>

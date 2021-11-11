@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import Head from 'next/head'
 
 import Layout from '@/components/Layout'
 import EditorPageTemplate from '@/components/templates/EditorPageTemplate'
@@ -29,6 +30,9 @@ function EditorPage() {
 
   return (
     <Layout>
+      <Head>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+      </Head>
       <EditorPageTemplate />
     </Layout>
   )
