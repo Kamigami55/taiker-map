@@ -21,7 +21,14 @@ function MapComponent() {
 
   const { state: { enableControl } = {}, dispatch } = useMapContext()
   const {
-    state: { theme, roadsDensity, landmarksDensity, labelsDensity, canvasSize },
+    state: {
+      theme,
+      roadsDensity,
+      landmarksDensity,
+      labelsDensity,
+      canvasSize,
+      markerStyle: { shape: markerShape },
+    },
   } = useStyleContext()
   const { state: { spots } = {} } = useSpotsContext()
 
@@ -72,7 +79,9 @@ function MapComponent() {
       }}
       onIdle={updateMapControl}
     >
-      {spots?.map((spot) => spot.selected && <MarkerCustom key={spot.id} spot={spot} />)}
+      {spots?.map(
+        (spot) => spot.selected && <MarkerCustom key={spot.id} spot={spot} shape={markerShape} />
+      )}
     </GoogleMap>
   ) : (
     <></>

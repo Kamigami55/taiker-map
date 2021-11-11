@@ -4,6 +4,7 @@ import MapThemes from '@/mapStyles/themes'
 import RoadsDensityConfigs from '@/mapStyles/density/RoadsDensityConfigs'
 import LandmarksDensityConfigs from '@/mapStyles/density/LandmarksDensityConfigs'
 import LabelsDensityConfigs from '@/mapStyles/density/LabelsDensityConfigs'
+import { MARKER_SHAPE_PIN } from '@/components/atoms/MarkerCustom/markerShape'
 
 const StyleContext = React.createContext()
 
@@ -16,11 +17,15 @@ const DefaultReducerState = {
     width: 800,
     height: 500,
   },
+  markerStyle: {
+    shape: MARKER_SHAPE_PIN,
+  },
 }
 
 export const CHANGE_MAP_THEME = 'CHANGE_MAP_THEME'
 export const CHANGE_DENSITY = 'CHANGE_DENSITY'
 export const CHANGE_CANVAS_SIZE = 'CHANGE_CANVAS_SIZE'
+export const CHANGE_MARKER_SHAPE = 'CHANGE_MARKER_SHAPE'
 
 function styleReducer(state, { type, payload = {} } = {}) {
   switch (type) {
@@ -47,6 +52,17 @@ function styleReducer(state, { type, payload = {} } = {}) {
         canvasSize: {
           width: width || state.canvasSize.width,
           height: height || state.canvasSize.height,
+        },
+      }
+    }
+
+    case CHANGE_MARKER_SHAPE: {
+      const { shape } = payload
+      return {
+        ...state,
+        markerStyle: {
+          ...state.markerStyle,
+          shape,
         },
       }
     }

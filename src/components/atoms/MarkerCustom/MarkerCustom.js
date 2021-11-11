@@ -4,12 +4,12 @@ import { Marker } from '@react-google-maps/api'
 import { MARKER_SHAPE_CIRCLE, MARKER_SHAPE_CONFIGS, MARKER_SHAPE_PIN } from './markerShape'
 
 export default function MarkerCustom({ spot, shape }) {
-  const ShapeConfig = MARKER_SHAPE_CONFIGS[shape]
+  const shapeIconProps = MARKER_SHAPE_CONFIGS[shape]?.iconProps || {}
   return (
     <Marker
       position={spot.position}
       icon={{
-        ...ShapeConfig,
+        ...shapeIconProps,
         fillColor: 'red',
         fillOpacity: 1,
         strokeColor: 'black',
