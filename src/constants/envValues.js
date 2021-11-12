@@ -1,3 +1,4 @@
 export const NEXT_PUBLIC_GOOGLE_MAP_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY
 export const NEXT_PUBLIC_TDX_APP_ID = process.env.NEXT_PUBLIC_TDX_APP_ID
 export const NEXT_PUBLIC_TDX_APP_KEY = process.env.NEXT_PUBLIC_TDX_APP_KEY
+export const NEXT_PUBLIC_GTM_ID = process.env.NEXT_PUBLIC_GTM_ID
