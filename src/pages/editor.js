@@ -9,6 +9,7 @@ import { SET_SPOTS, SpotsProvider, useSpotsContext } from '@/contexts/spotsConte
 import { useAllTourismSpots } from '@/api/useAllTourismSpots'
 import { ExportProvider } from '@/contexts/exportContext'
 import { StyleProvider } from '@/contexts/styleContext'
+import { SITE_TITLE } from '@/constants/siteMeta'
 
 function EditorPage() {
   // const [position] = useGeolocation()
@@ -31,6 +32,7 @@ function EditorPage() {
   return (
     <Layout>
       <Head>
+        <title>{`編輯器 - ${SITE_TITLE}`}</title>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
       </Head>
       <EditorPageTemplate />
