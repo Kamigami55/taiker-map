@@ -34,6 +34,7 @@ function MapComponent() {
       canvasSize,
       markerStyle: {
         shape: markerShape,
+        showLabel: markerShowLabel,
         icon: markerIconCodeOfTypes,
         iconColor: markerIconColorOfTypes,
         shapeColor: markerShapeColorOfTypes,
@@ -85,6 +86,7 @@ function MapComponent() {
           iconColor={markerIconColorOfTypes[spot.type]}
           shapeColor={markerShapeColorOfTypes[spot.type]}
           borderColor={markerBorderColorOfTypes[spot.type]}
+          label={markerShowLabel ? spot.name : null}
         />
       )
     })

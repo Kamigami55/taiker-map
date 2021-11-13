@@ -1,0 +1,14 @@
+.togglePath {
+  transition: background 0.3s ease-in-out;
+}
+.toggleCircle {
+  top: 0.2rem;
+  left: 0.25rem;
+  transition: all 0.3s ease-in-out;
+}
+input:checked ~ .toggleCircle {
+  transform: translateX(100%);
+}
+input:checked ~ .togglePath {
+  background-color: #172a50;
+}

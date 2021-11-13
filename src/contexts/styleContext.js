@@ -32,6 +32,7 @@ const DefaultReducerState = {
   },
   markerStyle: {
     shape: MARKER_SHAPE_PIN,
+    showLabel: false,
     icon: {
       [SpotType.SCENIC_SPOT]: DEFAULT_SCENIC_SPOT_ICON,
       [SpotType.RESTAURANT]: DEFAULT_RESTAURANT_ICON,
@@ -65,6 +66,7 @@ export const CHANGE_CANVAS_SIZE = 'CHANGE_CANVAS_SIZE'
 export const CHANGE_MARKER_SHAPE = 'CHANGE_MARKER_SHAPE'
 export const CHANGE_MARKER_ICON = 'CHANGE_MARKER_ICON'
 export const CHANGE_MARKER_COLOR = 'CHANGE_MARKER_COLOR'
+export const CHANGE_MARKER_SHOW_LABEL = 'CHANGE_MARKER_SHOW_LABEL'
 
 function styleReducer(state, { type, payload = {} } = {}) {
   switch (type) {
@@ -131,6 +133,17 @@ function styleReducer(state, { type, payload = {} } = {}) {
             ...state.markerStyle[colorType],
             [spotType]: color,
           },
+        },
+      }
+    }
+
+    case CHANGE_MARKER_SHOW_LABEL: {
+      const { showLabel } = payload
+      return {
+        ...state,
+        markerStyle: {
+          ...state.markerStyle,
+          showLabel,
         },
       }
     }
