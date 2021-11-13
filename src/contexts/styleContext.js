@@ -15,13 +15,11 @@ import { SpotType } from '@/contexts/spotsContext'
 
 const StyleContext = React.createContext()
 
-// TODO define marker color type constant
-// export const MarkerColorType = {
-//   SCENIC_SPOT: 'SCENIC_SPOT',
-//   RESTAURANT: 'RESTAURANT',
-//   HOTEL: 'HOTEL',
-//   ACTIVITY: 'ACTIVITY',
-// }
+export const MarkerColorType = {
+  iconColor: 'iconColor',
+  shapeColor: 'shapeColor',
+  borderColor: 'borderColor',
+}
 
 const DefaultReducerState = {
   theme: MapThemes[0],
@@ -124,7 +122,7 @@ function styleReducer(state, { type, payload = {} } = {}) {
 
     case CHANGE_MARKER_COLOR: {
       const { spotType, colorType, color } = payload
-      if (!['iconColor', 'shapeColor', 'borderColor'].includes(colorType)) return state
+      if (!Object.values(MarkerColorType).includes(colorType)) return state
       return {
         ...state,
         markerStyle: {

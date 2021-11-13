@@ -3,7 +3,12 @@ import { Disclosure } from '@headlessui/react'
 
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md'
 
-import { CHANGE_MARKER_COLOR, CHANGE_MARKER_ICON, useStyleContext } from '@/contexts/styleContext'
+import {
+  CHANGE_MARKER_COLOR,
+  CHANGE_MARKER_ICON,
+  MarkerColorType,
+  useStyleContext,
+} from '@/contexts/styleContext'
 import { MARKER_ICON_CONFIGS } from '@/components/atoms/MarkerCustom/markerIcon'
 import { SpotType } from '@/contexts/spotsContext'
 import ColorInput from '@/components/atoms/ColorInput'
@@ -83,19 +88,21 @@ export default function MarkerIconSelect() {
                 <div className="flex flex-wrap gap-2 pb-4">
                   <ColorInput
                     value={markerShapeColorOfTypes[type]}
-                    onChange={(value) => handleChangeColor(type, 'shapeColor', value)}
+                    onChange={(value) => handleChangeColor(type, MarkerColorType.shapeColor, value)}
                     label="地標顏色"
                     id={`shapeColor-${type}`}
                   />
                   <ColorInput
                     value={markerIconColorOfTypes[type]}
-                    onChange={(value) => handleChangeColor(type, 'iconColor', value)}
+                    onChange={(value) => handleChangeColor(type, MarkerColorType.iconColor, value)}
                     label="圖示顏色"
                     id={`iconColor-${type}`}
                   />
                   <ColorInput
                     value={markerBorderColorOfTypes[type]}
-                    onChange={(value) => handleChangeColor(type, 'borderColor', value)}
+                    onChange={(value) =>
+                      handleChangeColor(type, MarkerColorType.borderColor, value)
+                    }
                     label="邊線顏色"
                     id={`borderColor-${type}`}
                   />
