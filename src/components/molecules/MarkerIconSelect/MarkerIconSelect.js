@@ -3,9 +3,10 @@ import { Disclosure } from '@headlessui/react'
 
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md'
 
-import { CHANGE_MARKER_ICON, useStyleContext } from '@/contexts/styleContext'
+import { CHANGE_MARKER_COLOR, CHANGE_MARKER_ICON, useStyleContext } from '@/contexts/styleContext'
 import { MARKER_ICON_CONFIGS } from '@/components/atoms/MarkerCustom/markerIcon'
 import { SpotType } from '@/contexts/spotsContext'
+import ColorInput from '@/components/atoms/ColorInput'
 
 const Sections = [
   {
@@ -29,12 +30,24 @@ const Sections = [
 export default function MarkerIconSelect() {
   const {
     state: {
-      markerStyle: { icon: selectedIconTextsByType },
+      markerStyle: {
+        icon: selectedIconTextsByType,
+        iconColor: markerIconColorOfTypes,
+        shapeColor: markerShapeColorOfTypes,
+        borderColor: markerBorderColorOfTypes,
+      },
     },
     dispatch,
   } = useStyleContext()
 
-  const handleSelect = (type, icon) => {
+  const handleChangeColor = (spotType, colorType, color) => {
+    dispatch({
+      type: CHANGE_MARKER_COLOR,
+      payload: { spotType, colorType, color },
+    })
+  }
+
+  const handleSelectIcon = (type, icon) => {
     dispatch({
       type: CHANGE_MARKER_ICON,
       payload: { type, icon },
@@ -52,6 +65,7 @@ export default function MarkerIconSelect() {
               <Disclosure.Button className="flex justify-between items-center py-2 px-4 w-full bg-F4F7FB rounded-lg">
                 <div className="flex gap-2 items-center">
                   <span className="font-material-icons text-2xl">
+                    {/* TODO change preview icon color based on selected style */}
                     {selectedIconTextsByType[type]}
                   </span>
                   <span className="text-1A1A1A">{name}</span>
@@ -67,6 +81,27 @@ export default function MarkerIconSelect() {
 
               <Disclosure.Panel className="pl-1 mt-2">
                 <div className="flex flex-wrap gap-2 pb-4">
+                  <ColorInput
+                    value={markerShapeColorOfTypes[type]}
+                    onChange={(value) => handleChangeColor(type, 'shapeColor', value)}
+                    label="地標顏色"
+                    id={`shapeColor-${type}`}
+                  />
+                  <ColorInput
+                    value={markerIconColorOfTypes[type]}
+                    onChange={(value) => handleChangeColor(type, 'iconColor', value)}
+                    label="圖示顏色"
+                    id={`iconColor-${type}`}
+                  />
+                  <ColorInput
+                    value={markerBorderColorOfTypes[type]}
+                    onChange={(value) => handleChangeColor(type, 'borderColor', value)}
+                    label="邊線顏色"
+                    id={`borderColor-${type}`}
+                  />
+                </div>
+
+                <div className="flex flex-wrap gap-2 pb-4">
                   {MARKER_ICON_CONFIGS.map(({ code }) => {
                     return (
                       <button
@@ -78,7 +113,7 @@ export default function MarkerIconSelect() {
                             : 'hover:border-blue-300'
                         )}
                         onClick={() => {
-                          handleSelect(type, code)
+                          handleSelectIcon(type, code)
                         }}
                       >
                         <span className="w-7 h-7 font-material-icons text-xl">{code}</span>

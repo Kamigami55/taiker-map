@@ -15,6 +15,14 @@ import { SpotType } from '@/contexts/spotsContext'
 
 const StyleContext = React.createContext()
 
+// TODO define marker color type constant
+// export const MarkerColorType = {
+//   SCENIC_SPOT: 'SCENIC_SPOT',
+//   RESTAURANT: 'RESTAURANT',
+//   HOTEL: 'HOTEL',
+//   ACTIVITY: 'ACTIVITY',
+// }
+
 const DefaultReducerState = {
   theme: MapThemes[0],
   roadsDensity: RoadsDensityConfigs[RoadsDensityConfigs.length - 1],
@@ -32,6 +40,24 @@ const DefaultReducerState = {
       [SpotType.HOTEL]: DEFAULT_HOTEL_ICON,
       [SpotType.ACTIVITY]: DEFAULT_ACTIVITY_ICON,
     },
+    iconColor: {
+      [SpotType.SCENIC_SPOT]: '#ffffff',
+      [SpotType.RESTAURANT]: '#ffffff',
+      [SpotType.HOTEL]: '#ffffff',
+      [SpotType.ACTIVITY]: '#ffffff',
+    },
+    shapeColor: {
+      [SpotType.SCENIC_SPOT]: '#34a853',
+      [SpotType.RESTAURANT]: '#fbbc05',
+      [SpotType.HOTEL]: '#ea4335',
+      [SpotType.ACTIVITY]: '#4285f4',
+    },
+    borderColor: {
+      [SpotType.SCENIC_SPOT]: '#000000',
+      [SpotType.RESTAURANT]: '#000000',
+      [SpotType.HOTEL]: '#000000',
+      [SpotType.ACTIVITY]: '#000000',
+    },
   },
 }
 
@@ -40,6 +66,7 @@ export const CHANGE_DENSITY = 'CHANGE_DENSITY'
 export const CHANGE_CANVAS_SIZE = 'CHANGE_CANVAS_SIZE'
 export const CHANGE_MARKER_SHAPE = 'CHANGE_MARKER_SHAPE'
 export const CHANGE_MARKER_ICON = 'CHANGE_MARKER_ICON'
+export const CHANGE_MARKER_COLOR = 'CHANGE_MARKER_COLOR'
 
 function styleReducer(state, { type, payload = {} } = {}) {
   switch (type) {
@@ -90,6 +117,21 @@ function styleReducer(state, { type, payload = {} } = {}) {
           icon: {
             ...state.markerStyle.icon,
             [type]: icon,
+          },
+        },
+      }
+    }
+
+    case CHANGE_MARKER_COLOR: {
+      const { spotType, colorType, color } = payload
+      if (!['iconColor', 'shapeColor', 'borderColor'].includes(colorType)) return state
+      return {
+        ...state,
+        markerStyle: {
+          ...state.markerStyle,
+          [colorType]: {
+            ...state.markerStyle[colorType],
+            [spotType]: color,
           },
         },
       }

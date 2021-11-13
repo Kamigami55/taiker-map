@@ -27,7 +27,13 @@ function MapComponent() {
       landmarksDensity,
       labelsDensity,
       canvasSize,
-      markerStyle: { shape: markerShape, icon: markerIconCodeOfTypes },
+      markerStyle: {
+        shape: markerShape,
+        icon: markerIconCodeOfTypes,
+        iconColor: markerIconColorOfTypes,
+        shapeColor: markerShapeColorOfTypes,
+        borderColor: markerBorderColorOfTypes,
+      },
     },
   } = useStyleContext()
   const { state: { spots } = {} } = useSpotsContext()
@@ -87,6 +93,9 @@ function MapComponent() {
               spot={spot}
               shape={markerShape}
               labelIconText={markerIconCodeOfTypes[spot.type]}
+              iconColor={markerIconColorOfTypes[spot.type]}
+              shapeColor={markerShapeColorOfTypes[spot.type]}
+              borderColor={markerBorderColorOfTypes[spot.type]}
             />
           )
       )}
