@@ -41,7 +41,7 @@ function MapComponent() {
       },
     },
   } = useStyleContext()
-  const { state: { spots, scenicSpots, restaurants, hotels, activities } = {} } = useSpotsContext()
+  const { state: { scenicSpots, restaurants, hotels, activities } = {} } = useSpotsContext()
 
   const onLoad = React.useCallback((map) => {
     dispatch({ type: SET_MAP, payload: { map } })
