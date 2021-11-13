@@ -53,9 +53,9 @@ export default function DensitySelect({ type }) {
         value={selectedDensityOption.value}
         onChange={handleChange}
       />
-      <div className="flex justify-between -mx-3 mt-1 text-xs text-gray-600">
+      <div className="flex justify-between mt-1 text-xs text-gray-600">
         {options.map((option) => (
-          <span key={option.name} className="w-10 text-center">
+          <span key={option.name} className="text-center">
             {option.name}
           </span>
         ))}
