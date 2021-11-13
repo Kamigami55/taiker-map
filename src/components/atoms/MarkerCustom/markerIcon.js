@@ -3,7 +3,37 @@ export const DEFAULT_RESTAURANT_ICON = '\ue56c'
 export const DEFAULT_HOTEL_ICON = '\ue53a'
 export const DEFAULT_ACTIVITY_ICON = '\uea65'
 
+export const SPECIAL_ICON_TYPE_NUMBER = '\ue3d0'
+export const SPECIAL_ICON_TYPE_ALPHABET = '\ue053'
+
+/**
+ * getSpecialIconText
+ * @param {Enum} type Enum of the special icon type
+ * @param {Number} index starts from 0
+ * @returns string
+ */
+export const getSpecialIconText = (type, index) => {
+  if (type === SPECIAL_ICON_TYPE_NUMBER) {
+    return (index + 1).toString()
+  }
+  if (type === SPECIAL_ICON_TYPE_ALPHABET) {
+    const availableTexts = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    return availableTexts[index % availableTexts.length]
+  }
+  return ''
+}
+
 export const MARKER_ICON_CONFIGS = [
+  {
+    code: SPECIAL_ICON_TYPE_NUMBER,
+    name: 'filter_1', // icon name in Material Icons
+    specialText: '1 ~ 99',
+  },
+  {
+    code: SPECIAL_ICON_TYPE_ALPHABET,
+    name: 'sort_by_alpha',
+    specialText: 'A ~ Z',
+  },
   {
     code: DEFAULT_HOTEL_ICON,
     name: 'hotel',

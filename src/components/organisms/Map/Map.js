@@ -12,6 +12,11 @@ import MarkerCustom from '@/components/atoms/MarkerCustom'
 
 import styles from './Map.module.scss'
 import MapStub from './MapStub'
+import {
+  getSpecialIconText,
+  SPECIAL_ICON_TYPE_ALPHABET,
+  SPECIAL_ICON_TYPE_NUMBER,
+} from '@/components/atoms/MarkerCustom/markerIcon'
 
 function MapComponent() {
   const { isLoaded } = useJsApiLoader({
@@ -36,7 +41,7 @@ function MapComponent() {
       },
     },
   } = useStyleContext()
-  const { state: { spots } = {} } = useSpotsContext()
+  const { state: { spots, scenicSpots, restaurants, hotels, activities } = {} } = useSpotsContext()
 
   const onLoad = React.useCallback((map) => {
     dispatch({ type: SET_MAP, payload: { map } })
@@ -60,6 +65,30 @@ function MapComponent() {
       ),
     [theme.config, roadsDensity.config, landmarksDensity.config, labelsDensity.config]
   )
+
+  const renderSpots = (spots) => {
+    return spots?.map((spot, index) => {
+      if (!spot.selected) return null
+      const isSpecial = [SPECIAL_ICON_TYPE_NUMBER, SPECIAL_ICON_TYPE_ALPHABET].includes(
+        markerIconCodeOfTypes[spot.type]
+      )
+      const labelIconText = isSpecial
+        ? getSpecialIconText(markerIconCodeOfTypes[spot.type], index)
+        : markerIconCodeOfTypes[spot.type]
+      return (
+        <MarkerCustom
+          key={spot.id}
+          spot={spot}
+          shape={markerShape}
+          labelIconText={labelIconText}
+          useMaterialIcons={!isSpecial}
+          iconColor={markerIconColorOfTypes[spot.type]}
+          shapeColor={markerShapeColorOfTypes[spot.type]}
+          borderColor={markerBorderColorOfTypes[spot.type]}
+        />
+      )
+    })
+  }
 
   return isLoaded ? (
     <GoogleMap
@@ -85,20 +114,10 @@ function MapComponent() {
       }}
       onIdle={updateMapControl}
     >
-      {spots?.map(
-        (spot) =>
-          spot.selected && (
-            <MarkerCustom
-              key={spot.id}
-              spot={spot}
-              shape={markerShape}
-              labelIconText={markerIconCodeOfTypes[spot.type]}
-              iconColor={markerIconColorOfTypes[spot.type]}
-              shapeColor={markerShapeColorOfTypes[spot.type]}
-              borderColor={markerBorderColorOfTypes[spot.type]}
-            />
-          )
-      )}
+      {renderSpots(scenicSpots)}
+      {renderSpots(restaurants)}
+      {renderSpots(hotels)}
+      {renderSpots(activities)}
     </GoogleMap>
   ) : (
     <></>

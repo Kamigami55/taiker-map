@@ -9,7 +9,11 @@ import {
   MarkerColorType,
   useStyleContext,
 } from '@/contexts/styleContext'
-import { MARKER_ICON_CONFIGS } from '@/components/atoms/MarkerCustom/markerIcon'
+import {
+  MARKER_ICON_CONFIGS,
+  SPECIAL_ICON_TYPE_ALPHABET,
+  SPECIAL_ICON_TYPE_NUMBER,
+} from '@/components/atoms/MarkerCustom/markerIcon'
 import { SpotType } from '@/contexts/spotsContext'
 import ColorInput from '@/components/atoms/ColorInput'
 
@@ -109,7 +113,11 @@ export default function MarkerIconSelect() {
                 </div>
 
                 <div className="flex flex-wrap gap-2 pb-4">
-                  {MARKER_ICON_CONFIGS.map(({ code }) => {
+                  {MARKER_ICON_CONFIGS.map(({ code, specialText }) => {
+                    const isSpecial = [
+                      SPECIAL_ICON_TYPE_NUMBER,
+                      SPECIAL_ICON_TYPE_ALPHABET,
+                    ].includes(code)
                     return (
                       <button
                         key={code}
@@ -123,7 +131,14 @@ export default function MarkerIconSelect() {
                           handleSelectIcon(type, code)
                         }}
                       >
-                        <span className="w-7 h-7 font-material-icons text-xl">{code}</span>
+                        <div
+                          className={cn(
+                            'text-xl h-7',
+                            isSpecial ? 'w-[68px]' : 'w-7 font-material-icons'
+                          )}
+                        >
+                          {isSpecial ? specialText : code}
+                        </div>
                       </button>
                     )
                   })}

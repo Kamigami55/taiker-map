@@ -8,6 +8,7 @@ export default function MarkerCustom({
   spot,
   shape,
   labelIconText,
+  useMaterialIcons,
   iconColor,
   shapeColor,
   borderColor,
@@ -25,7 +26,7 @@ export default function MarkerCustom({
       }}
       label={{
         text: labelIconText,
-        fontFamily: 'Material Icons',
+        fontFamily: useMaterialIcons ? 'Material Icons' : '',
         color: iconColor,
         fontSize: '16px',
       }}
@@ -39,6 +40,7 @@ MarkerCustom.propTypes = {
   }).isRequired,
   shape: PropTypes.oneOf([MARKER_SHAPE_PIN, MARKER_SHAPE_CIRCLE]),
   labelIconText: PropTypes.string,
+  useMaterialIcons: PropTypes.bool,
   iconColor: PropTypes.string,
   shapeColor: PropTypes.string,
   borderColor: PropTypes.string,
@@ -47,6 +49,7 @@ MarkerCustom.propTypes = {
 MarkerCustom.defaultProps = {
   shape: MARKER_SHAPE_CIRCLE,
   labelIconText: DEFAULT_SCENIC_SPOT_ICON,
+  useMaterialIcons: true,
   iconColor: 'white',
   shapeColor: 'red',
   borderColor: 'black',
