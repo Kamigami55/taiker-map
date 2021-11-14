@@ -18,6 +18,8 @@ Bootstrapped with [nextjs-starter-echo template](https://github.com/Kamigami55/n
 - Hygen as code generator
 - Eslint, Prettier
 - Husky, lint-staged pre-commit hook
+- Google Map JS API
+- MOTC TDX API (tourism spots data source)
 
 ## Commands
 
@@ -46,3 +48,13 @@ yarn new-component
 This calls hygen to generate new component with basic file structures, including its JS file and stories.js file
 
 You will be prompted to select component type (atoms, molecules, organisms, templates), and then input component name
+
+
+## Contribution
+
+PRs are very welcome!
+
+For the roadmap of this project, refer to this kanban:
+
+https://github.com/Kamigami55/taiker-map/projects/1
+
