@@ -8,10 +8,10 @@ export default function Navigation() {
           製作地圖
         </a>
       </Link>
-      <Link href="/">
+      {/* <Link href="/">
         <a className="text-lg font-bold text-172A50">使用說明</a>
-      </Link>
-      <Link href="/">
+      </Link> */}
+      <Link href="/about">
         <a className="text-lg font-bold text-172A50">關於我們</a>
       </Link>
     </div>
