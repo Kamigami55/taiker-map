@@ -2,13 +2,21 @@
 
 提供給商家或是旅行團簡單好上手的地圖編輯器
 
-[See it online](https://taiker-map.vercel.app/)
+See it online:
 
-Bootstrapped with [nextjs-starter-echo template](https://github.com/Kamigami55/nextjs-starter-echo)
+https://taiker-map.vercel.app/
 
 ![Preview](public/og-image.png)
 
+## Storybook
+
+Public storybook of this project (under construction):
+
+https://main--61788cb528bfe5004ad9a152.chromatic.com/
+
 ## features
+
+Bootstrapped with [nextjs-starter-echo template](https://github.com/Kamigami55/nextjs-starter-echo)
 
 - Next.js 12
 - TailwindCSS
