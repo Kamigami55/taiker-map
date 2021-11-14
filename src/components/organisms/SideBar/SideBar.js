@@ -1,14 +1,15 @@
 import { useState } from 'react'
 import cn from 'classnames'
 import Link from 'next/link'
+import Image from 'next/image'
 
 import { FaListUl } from 'react-icons/fa'
 import { BsMap } from 'react-icons/bs'
-import { IoMdMap } from 'react-icons/io'
 
 import SpotsPanel from '@/components/organisms/SpotsPanel'
 import StylePanel from '@/components/organisms/StylePanel'
 import ToggleButton from '@/components/atoms/ToggleButton'
+import { SITE_TITLE } from '@/constants/siteMeta'
 
 import styles from './SideBar.module.scss'
 
@@ -21,9 +22,9 @@ export default function SideBar() {
   return (
     <aside className={cn('w-[280px] h-screen bg-white p-4 flex flex-col', styles.sidebar)}>
       <Link href="/">
-        <a className="inline-flex flex-row items-center mb-6 text-172A50 cursor-pointer">
-          <IoMdMap className="w-[40px] h-[40px]" />
-          <span className="ml-1 text-2xl font-bold leading-10 text-1A1A1A">Maper</span>
+        <a className="inline-flex flex-row gap-2 items-center mb-6 text-172A50 cursor-pointer">
+          <Image src="/logo.svg" alt="" width={40} height={40} />
+          <span className="text-2xl font-bold leading-10">{SITE_TITLE}</span>
         </a>
       </Link>
 
