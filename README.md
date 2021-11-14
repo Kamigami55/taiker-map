@@ -1,5 +1,7 @@
 # 台客地圖 - 台灣景點地圖產生器 Taiwan Tourism Map Generator
 
+提供給商家或是旅行團簡單好上手的地圖編輯器
+
 [See it online](https://taiker-map.vercel.app/)
 
 Bootstrapped with [nextjs-starter-echo template](https://github.com/Kamigami55/nextjs-starter-echo)

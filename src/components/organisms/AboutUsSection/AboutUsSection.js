@@ -50,7 +50,7 @@ export default function AboutUsSection() {
         </li>
         <li>
           <a
-            href="https://github.com/Kamigami55/taiwan-tourism-map-generator"
+            href="https://github.com/Kamigami55/taiker-map"
             target="_blank"
             rel="noopener noreferrer"
           >
